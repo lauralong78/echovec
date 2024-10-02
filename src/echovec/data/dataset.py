@@ -47,6 +47,7 @@ class SyntheticSpeechDataset:
         envelope = 0.5 * (1.0 + np.sin(2.0 * np.pi * self._rng.uniform(2.0, 6.0) * t))
         signal *= envelope
         signal += self.noise * self._rng.standard_normal(self.num_samples)
+        # signal = np.tanh(1.5 * signal)  # tried soft-clipping; hurt the SNR, left out
         peak = np.max(np.abs(signal)) + 1e-8
         return signal / peak
 
