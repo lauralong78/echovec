@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use echovec in your research, please cite it as below."
+title: "echovec: self-supervised speech representation learning in pure NumPy"
+authors:
+  - family-names: "Feo"
+    given-names: "Meng"
+version: 0.1.0
+license: MIT
+repository-code: "https://github.com/lauralong78/echovec"
+keywords:
+  - self-supervised-learning
+  - speech-processing
+  - contrastive-learning
+  - wav2vec
+  - numpy
