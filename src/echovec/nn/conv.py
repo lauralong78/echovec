@@ -49,6 +49,8 @@ class Conv1d(Module):
         k, s = self.kernel_size, self.stride
         out_len = conv1d_output_length(length, k, s)
 
+        # TODO: this materialises the full im2col tensor up front; fine for the
+        # short clips used here, but worth revisiting for long-form audio.
         cols = np.empty((batch, self.in_channels, k, out_len), dtype=x.data.dtype)
         for offset in range(k):
             cols[:, :, offset, :] = x.data[:, :, offset : offset + s * out_len : s]
