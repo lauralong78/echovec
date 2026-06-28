@@ -96,6 +96,15 @@ def test_state_dict_roundtrip():
         np.testing.assert_array_equal(a.data, b.data)
 
 
+def test_load_state_dict_rejects_shape_mismatch():
+    enc = TransformerEncoder(8, num_heads=2, ff_dim=16, num_layers=1)
+    state = enc.state_dict()
+    bad_key = next(iter(state))
+    state[bad_key] = np.zeros((1, 1))
+    with pytest.raises(ValueError):
+        enc.load_state_dict(state)
+
+
 def test_module_list_discovers_parameters():
     class Net(Module):
         def __init__(self):
