@@ -50,6 +50,12 @@ def test_grad_division_and_pow():
     check_gradient(lambda t: (1.0 / (t**2)).sum(), x)
 
 
+def test_grad_tensor_divided_by_tensor():
+    x = np.abs(np.random.randn(2, 4)) + 0.5
+    denom = Tensor(np.abs(np.random.randn(2, 4)) + 0.5, requires_grad=True)
+    check_gradient(lambda t: (t / denom).sum(), x)
+
+
 def test_grad_exp_log():
     x = np.abs(np.random.randn(2, 4)) + 0.1
     check_gradient(lambda t: t.exp().sum(), x)
