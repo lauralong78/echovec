@@ -1,0 +1,25 @@
+# Ruff configuration — linting and formatting for echovec.
+line-length = 100
+target-version = "py39"
+src = ["src", "tests"]
+
+[lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "W",   # pycodestyle warnings
+    "C4",  # comprehensions
+]
+ignore = [
+    "E741",  # ambiguous variable names (g, v are meaningful here)
+    "B905",  # zip(strict=...) not available on 3.9
+]
+
+[lint.per-file-ignores]
+"tests/*" = ["E402"]
+
+[lint.isort]
+known-first-party = ["echovec"]
