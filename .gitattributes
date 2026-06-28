@@ -1,0 +1,14 @@
+* text=auto eol=lf
+
+*.py text
+*.md text
+*.toml text
+*.yml text
+*.yaml text
+*.cfg text
+*.ini text
+*.sh text eol=lf
+
+*.npz binary
+*.npy binary
+*.wav binary
