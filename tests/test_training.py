@@ -65,3 +65,12 @@ def test_checkpoint_roundtrip_preserves_outputs(tmp_path):
     restored.eval()
     after = restored.extract_features(Tensor(wav)).data
     np.testing.assert_allclose(before, after, atol=1e-10)
+
+
+def test_load_checkpoint_missing_parameter_raises(tmp_path):
+    import numpy as _np
+
+    path = tmp_path / "partial.npz"
+    _np.savez(str(path), **{"not_a_real_param": _np.zeros(3)})
+    with pytest.raises((KeyError, ValueError)):
+        load_checkpoint(Wav2Vec(tiny()), path)
