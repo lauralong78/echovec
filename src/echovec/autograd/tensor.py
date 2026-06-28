@@ -25,7 +25,11 @@ DEFAULT_DTYPE = np.float64
 
 
 def _unbroadcast(grad: np.ndarray, shape: tuple[int, ...]) -> np.ndarray:
-    """Reduce ``grad`` back to ``shape`` after NumPy broadcasting."""
+    """Sum ``grad`` back down to ``shape``, undoing any NumPy broadcasting.
+
+    Broadcasting can both prepend new axes and stretch size-1 axes, so we reduce
+    over both before reshaping to the original parameter shape.
+    """
     while grad.ndim > len(shape):
         grad = grad.sum(axis=0)
     for axis, dim in enumerate(shape):
